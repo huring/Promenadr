@@ -9,7 +9,7 @@ var globals = {};
 //create a private scope to prevent further polluting the global object
 (function() {
 	
-	// Init window modules
+	// Init window modules to avoid multiple contexts
 	var AppTabGroup = require('ui/AppTabGroup'),
 		AppMainWin = require('ui/AppMainWin'),
 		AppChallengesWin = require('ui/AppChallengesWin'),
