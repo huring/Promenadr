@@ -7,9 +7,9 @@ exports.AppSettingsWin = function(args) {
 		text: "App settings window"
 	});
 
-	Ti.API.log("App settings window");
 
 	instance.add(label);	
 
+	// Return window instance
 	return instance;
 }
