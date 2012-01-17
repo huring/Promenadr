@@ -5,6 +5,7 @@ require('lib/require_patch').monkeypatch(this);
 //add a single variable to the global scope to which we may choose to
 //intentionally add items to
 var globals = {};
+var AppActiveWin = require('ui/AppActiveWin');
 
 //create a private scope to prevent further polluting the global object
 (function() {

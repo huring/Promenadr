@@ -1,0 +1,128 @@
+/**
+ * WARNING: this is generated code and will be lost if changes are made.
+ * This generated source code is Copyright (c) 2010-2012 by Appcelerator, Inc. All Rights Reserved.
+ */
+html,body{height:100%;width:100%;}
+body{margin:0;}
+
+.HTML5_DOMElement {
+
+}
+
+.HTML5_Styleable {
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	line-height: normal;
+}
+.HTML5_verticalLayout{
+	clear: both;
+}
+
+.HTML5_verticalLayout > .HTML5_DOMElement {
+	position: relative !important;
+}
+
+.HTML5_horizontalLayout > .HTML5_DOMElement {
+	float: left;
+	position: relative;
+}
+
+.HTML5_VideoPlayer {
+	position: relative;
+}
+
+.HTML5_VideoPlayer video {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.HTML5_VideoPlayer.scaling-none {
+	overflow: hidden;
+}
+
+.HTML5_VideoPlayer.scaling-aspect-fit video {
+	height: 100%;
+	max-height: 100%;
+	max-width: 100%;
+	width: 100%;
+}
+
+.HTML5_VideoPlayer video.fullscreen {
+	background-color: #000;
+	position: fixed;
+}
+
+.HTML5_VideoPlayer video:-webkit-full-screen {
+	max-height: 100%;
+}
+
+.HTML5_VideoPlayer video:-moz-full-screen {
+	max-height: 100%;
+}
+
+
+.HTML5_Window {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	
+}
+
+
+.HTML5_Button {
+	-webkit-tap-highlight-color: rgba(96,96,96,0.5);
+	background-position: 50% 50%;
+	background-size: 100% 100%;
+	padding: 0;
+}
+
+
+.HTML5_TabGroup {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.HTML5_TabGroup .tabsHeaders {
+	width: 100%;
+	height: 10%;
+	box-sizing: border-box;
+	background-color: #CCCCCC;
+}
+
+.HTML5_TabGroup .tabHeader:first-child {
+	border-left-width: 0;
+}
+.HTML5_TabGroup .tabHeader {
+	box-sizing: border-box;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.HTML5_TabGroup .tabHeader.activeTabHeader {
+	background-color: #FFF;
+	border-top: 1px solid black;
+	border-bottom: 0;
+}
+
+.HTML5_TabGroup .tabsContent {
+	width: 100%;
+	height: 90%
+}
+
+.HTML5_Tab {
+	position: relative;
+	overflow: auto;
+	height:  100%;
+}
+
+
