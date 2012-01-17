@@ -1,0 +1,1 @@
+/Users/huring/Projects/GitHub/Promenadr/Resources/ui/AppSettingsWin.js
