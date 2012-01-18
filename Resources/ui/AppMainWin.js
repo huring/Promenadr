@@ -2,7 +2,7 @@
 exports.AppMainWin = function(args) {
 	
 	var instance = Ti.UI.createWindow(args);
-	
+	var GeoData = require('/lib/GeoData');
 	
 var currentLocationLabel = Titanium.UI.createLabel({
 	text:'Current Location (One Shot)',
@@ -114,9 +114,11 @@ instance.add(updatedLocationTime);
 	
 	button.addEventListener('click', function(e) {
 		
+		Ti.API.log("Clicked start button");
+		
 		Ti.Geolocation.purpose = "Track user GPS data";
 		
-		Ti.Geolocation.distanceFilter = 5;
+		// Ti.Geolocation.distanceFilter = 5;
 		Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 		
 		Ti.Geolocation.preferredProvider = "gps";
@@ -129,26 +131,16 @@ instance.add(updatedLocationTime);
 				return;
 			};
 			
-			globals.geodata = {
-				longitude: e.coords.longitude,
-				latitude: e.coords.latitude,
-				altitude: e.coords.altitude,
-				heading: e.coords.heading,
-				accuracy: e.coords.accuracy,
-				speed: e.coords.speed,
-				timestamp: e.coords.timestamp,
-				altitudeAccuracy: e.coords.altitudeAccuracy
-			};
-				
-			Ti.API.info('speed ' + globals.geodata.speed);
-			currentLocation.text = 'long:' + globals.geodata.longitude + ' lat: ' + globals.geodata.latitude;
+			var geo = new GeoData(e.coords);
 
-			Titanium.API.info('geo - current location: long ' + globals.geodata.longitude + ' lat ' + globals.geodata.latitude + ' accuracy ' + globals.geodata.accuracy);
+			Ti.API.info('speed ' + geo.speed);
+			currentLocation.text = 'long:' + geo.longitude + ' lat: ' + geo.latitude;
+			Titanium.API.info('geo - current location: long ' + geo.longitude + ' lat ' + geo.latitude + ' accuracy ' + geo.accuracy);
 
 		});
 		
 		Ti.Geolocation.addEventListener('location', function(e) {
-			Ti.API.info("Updated location");
+			
 			
 			if (!e.success || e.error)
 			{
@@ -160,21 +152,15 @@ instance.add(updatedLocationTime);
 				return;
 			}
 			
-			globals.geodata = {
-				longitude: e.coords.longitude,
-				latitude: e.coords.latitude,
-				altitude: e.coords.altitude,
-				heading: e.coords.heading,
-				accuracy: e.coords.accuracy,
-				speed: e.coords.speed,
-				timestamp: e.coords.timestamp,
-				altitudeAccuracy: e.coords.altitudeAccuracy
-			};
+			var geo = new GeoData(e.coords);
+			globals.poi.push(geo);
 			
-			updatedLocation.text = 'long:' + globals.geodata.longitude;
-			updatedLatitude.text = 'lat: '+ globals.geodata.latitude;
-			updatedLocationAccuracy.text = 'accuracy:' + globals.geodata.accuracy;
-			updatedLocationTime.text = 'timestamp:' +new Date(globals.geodata.timestamp);
+			Ti.API.log(JSON.stringify(globals.poi));
+				
+			updatedLocation.text = 'long:' + geo.longitude;
+			updatedLatitude.text = 'lat: '+ geo.latitude;
+			updatedLocationAccuracy.text = 'accuracy:' + geo.accuracy;
+			updatedLocationTime.text = 'timestamp:' +new Date(geo.timestamp);
 
 			updatedLatitude.color = 'red';
 			updatedLocation.color = 'red';
@@ -190,7 +176,7 @@ instance.add(updatedLocationTime);
 
 			},100);
 			
-			Titanium.API.info('geo - location updated: ' + new Date(globals.geodata.timestamp) + ' long ' + globals.geodata.longitude + ' lat ' + globals.geodata.latitude + ' accuracy ' + globals.geodata.accuracy);
+			// Titanium.API.info('geo - location updated: ' + new Date(geo.timestamp) + ' long ' + geo.longitude + ' lat ' + geo.latitude + ' accuracy ' + geo.accuracy);
 			
 		});
 		

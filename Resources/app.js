@@ -4,8 +4,9 @@ require('lib/require_patch').monkeypatch(this);
 
 //add a single variable to the global scope to which we may choose to
 //intentionally add items to
-var globals = {};
-var AppActiveWin = require('ui/AppActiveWin');
+var globals = {
+	poi: []
+};
 
 //create a private scope to prevent further polluting the global object
 (function() {
@@ -15,8 +16,7 @@ var AppActiveWin = require('ui/AppActiveWin');
 		AppMainWin = require('ui/AppMainWin'),
 		AppChallengesWin = require('ui/AppChallengesWin'),
 		AppSettingsWin = require('ui/AppSettingsWin');
-		
-
+	
 	//create our global tab group	
 	globals.tabs = new AppTabGroup(
 		{
