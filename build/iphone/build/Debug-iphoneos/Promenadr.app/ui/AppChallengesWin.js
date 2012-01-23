@@ -1,1 +1,0 @@
-/Users/huring/Projects/GitHub/Promenadr/Resources/ui/AppChallengesWin.js
