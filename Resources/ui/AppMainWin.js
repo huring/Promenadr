@@ -155,8 +155,6 @@ instance.add(updatedLocationTime);
 			var geo = new GeoData(e.coords);
 			globals.poi.push(geo);
 			
-			Ti.API.log(JSON.stringify(globals.poi));
-				
 			updatedLocation.text = 'long:' + geo.longitude;
 			updatedLatitude.text = 'lat: '+ geo.latitude;
 			updatedLocationAccuracy.text = 'accuracy:' + geo.accuracy;
@@ -181,8 +179,7 @@ instance.add(updatedLocationTime);
 		});
 		
 	});
-	
-
+		
 	instance.add(button);
 
 	return instance;

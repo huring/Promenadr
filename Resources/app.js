@@ -16,6 +16,7 @@ var globals = {
 		AppMainWin = require('ui/AppMainWin'),
 		AppChallengesWin = require('ui/AppChallengesWin'),
 		AppSettingsWin = require('ui/AppSettingsWin');
+		AppMapWin = require('ui/AppMapWin');
 	
 	//create our global tab group	
 	globals.tabs = new AppTabGroup(
@@ -42,7 +43,16 @@ var globals = {
 				title:'App settings',
 				backgroundColor:'white'
 			})
+		},
+		{
+			title: 'Map view',
+			icon: 'KS_nav_views.png',
+			window: new AppMapWin({
+				title:'App map',
+				backgroundColor:'white'
+			})
 		}
+		
 	);
 
 	globals.tabs.open();
