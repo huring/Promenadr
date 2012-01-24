@@ -14,8 +14,6 @@
 /*  Note that minimal error checking is performed in this example code!                           */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-Ti.API.log("Geodesy loaded");
-
 /**
  * Creates a point on the earth's surface at the supplied latitude / longitude
  *

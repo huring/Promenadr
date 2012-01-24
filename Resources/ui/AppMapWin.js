@@ -20,8 +20,8 @@ exports.AppMapWin = function(args) {
 	
 	Ti.API.addEventListener('createdgeodata', function(e) {
 		
-		Ti.API.log('Geodata item created');
-		Ti.API.log("Lat: " + e.data.latitude + " & lng: " + e.data.longitude); 
+		// Ti.API.log('Geodata item created');
+		// Ti.API.log("Lat: " + e.data.latitude + " & lng: " + e.data.longitude); 
 		
 		var point = Titanium.Map.createAnnotation({
     		latitude: e.data.latitude,
@@ -35,8 +35,8 @@ exports.AppMapWin = function(args) {
 		
 	});
 
-
 	var points = [];
+
 	/*
 	for (var i = sampleGeoData.points.length - 1; i >= 0; i--){
 	 	
@@ -62,11 +62,8 @@ exports.AppMapWin = function(args) {
 	
 	};
 	*/
-	
 
 	instance.add(mapview);
-
 	Ti.API.log("Total distance: " + Math.floor(distance) + " meters");
-
 	return instance;
 };

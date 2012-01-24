@@ -3,6 +3,10 @@ exports.AppMainWin = function(args) {
 	
 	var instance = Ti.UI.createWindow(args);
 	var GeoData = require('/lib/GeoData');
+	var Promenadr = require('/lib/Promenadr');
+	
+	// Init class
+	var prom = new Promenadr();
 	
 var currentLocationLabel = Titanium.UI.createLabel({
 	text:'Current Location (One Shot)',
@@ -82,9 +86,16 @@ var updatedLocationTime = Titanium.UI.createLabel({
 instance.add(updatedLocationTime);
 
 	
-	var button = Titanium.UI.createButton({
+	var startButton = Titanium.UI.createButton({
 		title: 'Start',
 		top: 10,
+		width: 100,
+		height: 50
+	});
+	
+	var stopButton = Titanium.UI.createButton({
+		title: 'Stop',
+		top: 270,
 		width: 100,
 		height: 50
 	});
@@ -112,35 +123,22 @@ instance.add(updatedLocationTime);
 		}
 	};
 	
-	button.addEventListener('click', function(e) {
+	
+	Ti.API.addEventListener('promGetCurrentLocation', function(e) {
+		currentLocation.text = 'long:' + e.data.longitude + ' lat: ' + e.data.latitude;
+	});
+	
+	startButton.addEventListener('click', function(e) {
+		
+		// TODO animate to active window while geolocation is running
+		// TODO move GPS settings to app settings
 		
 		Ti.API.log("Clicked start button");
-		
-		Ti.Geolocation.purpose = "Track user GPS data";
-		
-		// Ti.Geolocation.distanceFilter = 5;
-		Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
-		
-		Ti.Geolocation.preferredProvider = "gps";
-		
-		Ti.Geolocation.getCurrentPosition(function(e) {
-			
-			if (!e.success || e.error) {
-				Ti.API.info("Code translation: "+translateErrorCode(e.code));
-				alert('error ' + JSON.stringify(e.error));
-				return;
-			};
-			
-			var geo = new GeoData(e.coords);
 
-			Ti.API.info('speed ' + geo.speed);
-			currentLocation.text = 'long:' + geo.longitude + ' lat: ' + geo.latitude;
-			Titanium.API.info('geo - current location: long ' + geo.longitude + ' lat ' + geo.latitude + ' accuracy ' + geo.accuracy);
-
-		});
+		// Get current location from phone
+		var currentLocation = prom.getCurrentLocation();
 		
 		Ti.Geolocation.addEventListener('location', function(e) {
-			
 			
 			if (!e.success || e.error)
 			{
@@ -172,15 +170,17 @@ instance.add(updatedLocationTime);
 				updatedLocationAccuracy.color = '#444';
 				updatedLocationTime.color = '#444';
 
-			},100);
+			}, 100);
 			
 			// Titanium.API.info('geo - location updated: ' + new Date(geo.timestamp) + ' long ' + geo.longitude + ' lat ' + geo.latitude + ' accuracy ' + geo.accuracy);
-			
 		});
-		
+
 	});
-		
-	instance.add(button);
+
+	stopButton.addEventListener('click', prom.stopTrackingGeodata);
+	
+	instance.add(stopButton);
+	instance.add(startButton);
 
 	return instance;
 };

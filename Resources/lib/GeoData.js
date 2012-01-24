@@ -1,8 +1,9 @@
 // Set up object for Geodata
 exports.GeoData = function(obj) {
 	
-	var geodata = {};
+	// TODO validate data before firing event
 	
+	var geodata = {};
 	
 	// Populate and validate geodata
 	geodata.longitude = obj.longitude,
@@ -14,7 +15,6 @@ exports.GeoData = function(obj) {
 	geodata.timestamp = obj.timestamp,
 	geodata.altitudeAccuracy = obj.altitudeAccuracy
 
-	// TODO Trigger event when new geodata object is created
 	Ti.API.fireEvent('createdgeodata', {data: geodata});
 
 	return geodata;
